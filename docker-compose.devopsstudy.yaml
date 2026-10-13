@@ -1,5 +1,6 @@
 services:
   devopsstudy:
+    image: oklabs/myimage:t${BUILD_NUMBER}
     build:
       context: .
       dockerfile: Dockerfile.devopsstudy.in
