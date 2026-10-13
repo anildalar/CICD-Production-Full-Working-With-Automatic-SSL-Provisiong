@@ -22,23 +22,25 @@ pipeline{
             }
         }
         stage('Deploy on Production Server') {
-                steps {
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'prod-server-credentials',
-                            usernameVariable: 'SSH_USER',
-                            passwordVariable: 'SSH_PASS'
-                        )
-                    ]) {
-                        sh '''
-                            set +x
-                            sshpass -p "$SSH_PASS" ssh 
-                                -o StrictHostKeyChecking=no 
-                                -o PreferredAuthentications=password 
-                                -o PubkeyAuthentication=no 
-                                "$SSH_USER@103.216.171.222" 
-                                "docker ps -a"
-                        '''
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'prod-server-credentials',
+                        usernameVariable: 'SSH_USER',
+                        passwordVariable: 'SSH_PASS'
+                    )
+                ]) {
+                    sh '''
+                        set +x
+                        export SSHPASS="$SSH_PASS"
+
+                        sshpass -e ssh -v \
+                            -o StrictHostKeyChecking=no \
+                            -o PreferredAuthentications=password \
+                            -o PubkeyAuthentication=no \
+                            "${SSH_USER}@103.216.171.222" \
+                            "docker ps -a"
+                    '''
                 }
             }
         }
