@@ -14,6 +14,10 @@ WORKDIR /var/www/html
 
 COPY . .
 
+RUN mv /var/www/html/.env /var/www/
+
+RUN mv /var/www/.env /var/www/app.env
+
 RUN chmod +x /var/www/html/entrypoint.sh
 
 ENTRYPOINT ["/var/www/html/entrypoint.sh"]

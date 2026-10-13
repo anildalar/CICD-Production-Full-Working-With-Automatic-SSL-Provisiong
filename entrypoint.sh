@@ -1,7 +1,7 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-ENV_FILE="/var/www/html/.env"
+ENV_FILE="/var/www/app.env"
 
 if [ ! -f "$ENV_FILE" ]; then
     echo "ERROR: .env file not found"
