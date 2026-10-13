@@ -6,3 +6,10 @@ services:
     env_file:
       - .env
     network_mode: host
+    restart: unless-stopped
+    volumes:
+      - letsencrypt_data:/etc/letsencrypt
+      - certbot_webroot:/var/www/certbot
+volumes:
+  letsencrypt_data:
+  certbot_webroot:
