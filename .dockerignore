@@ -1,4 +1,6 @@
 Jenkinsfile
 docker-compose.jenkins.yaml
+Dockerfile.devopsstudy.in
+Dockerfile.devopsstudy.in
 /.git
 /Jenkins_home
