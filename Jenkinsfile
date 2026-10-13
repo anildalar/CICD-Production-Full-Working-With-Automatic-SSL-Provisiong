@@ -22,9 +22,23 @@ pipeline{
             }
         }
         stage('Deploy on Production Server') {
-            steps {
-                sshagent(credentials: ['prod']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes root@103.216.171.222 "docker ps -a"'
+                steps {
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: 'prod-server-credentials',
+                            usernameVariable: 'SSH_USER',
+                            passwordVariable: 'SSH_PASS'
+                        )
+                    ]) {
+                        sh '''
+                            set +x
+                            sshpass -p "$SSH_PASS" ssh 
+                                -o StrictHostKeyChecking=no 
+                                -o PreferredAuthentications=password 
+                                -o PubkeyAuthentication=no 
+                                "$SSH_USER@103.216.171.222" 
+                                "docker ps -a"
+                        '''
                 }
             }
         }
