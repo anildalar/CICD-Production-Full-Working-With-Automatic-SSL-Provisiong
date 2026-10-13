@@ -12,8 +12,7 @@ RUN apt-get update \
 
 WORKDIR /var/www/html
 
-COPY index.html .
-COPY entrypoint.sh .
+COPY . .
 
 RUN chmod +x /var/www/html/entrypoint.sh
 

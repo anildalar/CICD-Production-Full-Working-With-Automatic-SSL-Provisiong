@@ -1,0 +1,4 @@
+Jenkinsfile
+docker-compose.jenkins.yaml
+/.git
+/Jenkins_home
