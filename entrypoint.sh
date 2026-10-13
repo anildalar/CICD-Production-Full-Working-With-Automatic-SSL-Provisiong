@@ -1,6 +1,17 @@
 #!/bin/bash
 set -Eeuo pipefail
 
+ENV_FILE="/var/www/html/.env"
+
+if [ ! -f "$ENV_FILE" ]; then
+    echo "ERROR: .env file not found"
+    exit 1
+fi
+
+set -a
+source "$ENV_FILE"
+set +a
+
 # ============================================================
 # DevOpsStudy - Apache + Let's Encrypt Automatic SSL
 # Domains:
