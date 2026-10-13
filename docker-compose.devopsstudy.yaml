@@ -1,0 +1,8 @@
+services:
+  devopsstudy:
+    build:
+      context: .
+      dockerfile: Dockerfile.devopsstudy.in
+    env_file:
+      - .env
+    network_mode: host
