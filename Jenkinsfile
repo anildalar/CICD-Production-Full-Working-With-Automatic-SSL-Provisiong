@@ -24,12 +24,7 @@ pipeline{
         stage('Deploy on Production Server') {
             steps {
                 sshagent(credentials: ['prod']) {
-                    sh '''
-                        ssh -o StrictHostKeyChecking=no 
-                            -o IdentitiesOnly=yes 
-                            root@103.216.171.222 
-                            "docker ps -a"
-                    '''
+                    sh 'ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes root@103.216.171.222 "docker ps -a"'
                 }
             }
         }
