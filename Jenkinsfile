@@ -23,7 +23,7 @@ pipeline{
    }
    	stage('Deploy on Production Server') {
     		steps {
-        		sh "ssh -o StrictCheckingHost=no root@103.216.171.222 docker ps -a";
+        		sh "ssh -o StrictHostKeyChecking=no root@103.216.171.222 docker ps -a";
     		}
 	}
    }
