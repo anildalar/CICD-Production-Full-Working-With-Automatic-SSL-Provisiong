@@ -21,33 +21,10 @@ pipeline{
           }
        }
    }
-   stage('Deploy on Production Server') {
-    steps {
-        withCredentials([
-            usernamePassword(
-                credentialsId: 'prodserver222',
-                usernameVariable: 'SSH_USER',
-                passwordVariable: 'SSH_PASS'
-            )
-        ]) {
-            sh '''
-                set +x
-
-                sshpass -p "$SSH_PASS" ssh \
-                    -o StrictHostKeyChecking=no \
-                    -o UserKnownHostsFile=/dev/null \
-                    "$SSH_USER@103.216.171.222" \
-                    "docker container rm -f devopsstudy"
-                    
-                # Deploy the Docker container
-                sshpass -p "$SSH_PASS" ssh \
-                    -o StrictHostKeyChecking=no \
-                    -o UserKnownHostsFile=/dev/null \
-                    "$SSH_USER@103.216.171.222" \
-                    "docker run -name devopsstudy -d -p 3000:80 oklabs/myimage:t${BUILD_NUMBER}"
-            '''
-        }
-    }
-}
+   	stage('Deploy on Production Server') {
+    		steps {
+        		sh "ssh -o StrictCheckingHost=no root@103.216.171.222 docker ps -a";
+    		}
+	}
    }
 }
