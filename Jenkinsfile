@@ -34,12 +34,12 @@ pipeline{
                         set +x
                         export SSHPASS="$SSH_PASS"
 
-                        sshpass -e ssh -v \
+                        sshpass -e ssh \
                             -o StrictHostKeyChecking=no \
                             -o PreferredAuthentications=password \
                             -o PubkeyAuthentication=no \
-                            "${SSH_USER}@103.216.171.222" \
-                            "docker ps -a"
+                            "$SSH_USER@103.216.171.222" \
+                            "docker rm -f devopsstudy 2>/dev/null || true; docker run --name devopsstudy -d --network host --restart unless-stopped oklabs/myimage:t${BUILD_NUMBER}"
                     '''
                 }
             }
